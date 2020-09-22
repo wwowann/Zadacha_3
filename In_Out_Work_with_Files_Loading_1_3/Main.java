@@ -1,22 +1,22 @@
 package In_Out_Work_with_Files_Loading_1_3;
 
+import In_Out_Work_with_Files_Saving_1_2.GameProgress;
+
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Main {
     public static void main(String[] args) {
-        GameProgress gameProgress = null;
         String gameAddress = "Games\\savegames\\save3.dat";
         String zipPath = "Games\\savegames\\save.zip";
         openZip(zipPath, "Games\\savegames\\");
-        System.out.println(openProgress(gameProgress, gameAddress));
+        System.out.println(openProgress(gameAddress));
     }
 
     public static void openZip(String zipPath, String pathOutZip) {
         try (ZipInputStream zis = new ZipInputStream
                 (new FileInputStream(zipPath))) {
-
             ZipEntry entry;
             String name;
             while ((entry = zis.getNextEntry()) != null) {
@@ -36,7 +36,8 @@ public class Main {
         }
     }
 
-    public static GameProgress openProgress(GameProgress gameProgress, String gameAddress) {
+    public static GameProgress openProgress(String gameAddress) {
+        GameProgress gameProgress = null;
         try (FileInputStream fis = new FileInputStream(gameAddress);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             gameProgress = (GameProgress) ois.readObject();

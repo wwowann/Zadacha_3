@@ -22,10 +22,10 @@ public class Main {
         zipFiles(zipPath, path);
 
         File dir = new File("Games\\savegames");
-        if (dir.isDirectory()){
-        for (File file: dir.listFiles()){
-            if (!file.getName().equals("save.zip"))
-            file.delete();
+        if (dir.isDirectory()) {
+            for (File file : dir.listFiles()) {
+                if (!file.getName().equals("save.zip"))
+                    file.delete();
             }
         }
     }
